@@ -1,41 +1,30 @@
 'use strict';
 
 exports.up = function(db, callback) {
-    db.runSql(
-        `
-CREATE TABLE strategies (
-  created_at timestamp default now(),
-  name varchar(255) PRIMARY KEY NOT NULL,
-  description text
-);
+    let collectionsReady = 0;
 
-CREATE TABLE features (
-  created_at timestamp default now(),
-  name varchar(255) PRIMARY KEY NOT NULL,
-  enabled integer default 0,
-  strategy_name varchar(255),
-  parameters json
-);
+    db.createCollection('strategies', cb);
+    db.createCollection('features', cb);
+    db.createCollection('events', cb);
 
-CREATE TABLE events (
-  id serial primary key,
-  created_at timestamp default now(),
-  type varchar(255) NOT NULL,
-  created_by varchar(255) NOT NULL,
-  data json
-);
-       `,
-        callback
-    );
+    function cb(arg) {
+        collectionsReady++;
+        if (collectionsReady >= 3) {
+            callback(arg);
+        }
+    }
 };
 
 exports.down = function(db, callback) {
-    db.runSql(
-        `
-DROP TABLE events;
-DROP TABLE features;
-DROP TABLE strategies;
-        `,
-        callback
-    );
+    let collectionsReady = 0;
+    db.dropTable('events', cb);
+    db.dropTable('features', cb);
+    db.dropTable('strategies', cb);
+
+    function cb(arg) {
+        collectionsReady++;
+        if (collectionsReady >= 3) {
+            callback(arg);
+        }
+    }
 };
