@@ -80,7 +80,7 @@ _Unleash_ will, at startup, check whether database migration is needed, and perf
 (database-url can also be set as a environment variable: DATABASE_URL)
 
 ```bash
-$ npm install unleash-server -g
+$ npm install unleash-server-mongo -g
 $ unleash -d DATABASE_URL=mongodb://localhost:27017/unleash -p 4242
 
 Unleash started on http://localhost:4242
