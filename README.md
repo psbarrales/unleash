@@ -67,7 +67,7 @@ if (unleash.isEnabled("AwesomeFeature")) {
 
 ## Requirements
 
-You will need a __PostgreSQL__ 9.3+ database instance to be able to run Unleash.
+You will need a __MongoDB__ database instance to be able to run Unleash.
 
 When starting Unleash you must specify a database URI (can be set as environment variable DATABASE_URL) 
 which includes a username and password, which has the rights to migrate the database.
@@ -81,7 +81,7 @@ _Unleash_ will, at startup, check whether database migration is needed, and perf
 
 ```bash
 $ npm install unleash-server -g
-$ unleash -d postgres://unleash_user:password@localhost:5432/unleash -p 4242
+$ unleash -d DATABASE_URL=mongodb://localhost:27017/unleash -p 4242
 
 Unleash started on http://localhost:4242
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "unleash-server",
+  "name": "unleash-server-mongodb",
   "description": "Unleash is an enterprise ready feature toggles service. It provides different strategies for handling feature toggles.",
   "version": "3.1.1",
   "keywords": [
@@ -18,10 +18,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:unleash/unleash.git"
+    "url": "ssh://git@github.com:psbarrales/unleash-mongodb.git"
   },
   "bugs": {
-    "url": "https://github.com/unleash/unleash/issues"
+    "url": "https://github.com/psbarrales/unleash-mongodb/issues"
   },
   "engines": {
     "node": ">=8"
@@ -36,7 +36,7 @@
     "start:google": "node examples/google-auth-unleash.js",
     "start:dev": "NODE_ENV=development supervisor --ignore ./node_modules/ server.js",
     "start:dev:pg": "pg_virtualenv npm run start:dev:pg-chain",
-    "start:dev:pg-chain": "export DATABASE_URL=postgres://$PGUSER:$PGPASSWORD@localhost:$PGPORT/postgres ; db-migrate up && npm run start:dev",
+    "start:dev:pg-chain": "export DATABASE_URL=mongodb://localhost:27017/unleash ; db-migrate up && npm run start:dev",
     "db-migrate": "db-migrate",
     "lint": "eslint .",
     "pretest": "npm run lint",
@@ -44,7 +44,7 @@
     "test:docker": "./scripts/docker-postgres.sh",
     "test:watch": "npm run test -- --watch",
     "test:pg-virtualenv": "pg_virtualenv npm run test:pg-virtualenv-chai",
-    "test:pg-virtualenv-chain": "export TEST_DATABASE_URL=postgres://$PGUSER:$PGPASSWORD@localhost:$PGPORT/postgres ; npm run db-migrate-testdb && npm test",
+    "test:pg-virtualenv-chain": "export TEST_DATABASE_URL=mongodb://localhost:27017/unleash ; npm run db-migrate-testdb && npm test",
     "test:coverage": "nyc npm run test",
     "test:coverage-report": "nyc report --reporter=text-lcov | coveralls",
     "precommit": "lint-staged"
@@ -64,7 +64,6 @@
     "cookie-session": "^2.0.0-beta.3",
     "db-migrate": "^0.11.1",
     "db-migrate-mongodb": "^1.5.0",
-    "db-migrate-pg": "^0.4.0",
     "deep-diff": "^1.0.0",
     "errorhandler": "^1.5.0",
     "express": "^4.16.3",
