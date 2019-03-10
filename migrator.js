@@ -7,7 +7,6 @@ const parseDbUrl = require('parse-database-url');
 
 function migrateDb({ databaseUrl, databaseSchema = 'public' }) {
     const custom = parseDbUrl(databaseUrl);
-    console.log(custom)
     custom.schema = databaseSchema;
     const dbmigrate = getInstance(true, {
         cwd: __dirname,
